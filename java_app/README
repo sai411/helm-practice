@@ -1,0 +1,7 @@
+annotations:
+      checksum/config: {{ include (print $.Template.BasePath "/configmap1.yaml") . | sha256sum }}
+
+
+
+
+range and with
