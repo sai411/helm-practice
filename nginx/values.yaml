@@ -1,0 +1,24 @@
+environment: dev
+app:
+ dev:
+    Name: test
+    containerImage: nginx
+    tag: latest
+    ComputeReq:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+      requests:
+        memory: "64Mi"
+        cpu: "250m"
+ prod:
+    Name: test-prod
+    containerImage: nginx
+    tag: latest
+    ComputeReq:
+      limits:
+        memory: "256Mi"
+        cpu: "1000m"
+      requests:
+        memory: "128Mi"
+        cpu: "500m"

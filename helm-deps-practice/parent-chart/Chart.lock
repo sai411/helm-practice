@@ -1,0 +1,6 @@
+dependencies:
+- name: nginx
+  repository: https://charts.bitnami.com/bitnami
+  version: 22.1.1
+digest: sha256:036e46163caa416740a5d55afb67ccd9f085d3230ccc2ae1e5ece09a3d6c260d
+generated: "2025-10-25T11:41:27.165067+05:30"

@@ -1,0 +1,100 @@
+<mxfile host="app.diagrams.net" modified="2025-10-21T08:50:00.000Z" agent="Mozilla/5.0" etag="base-arch-001" version="22.0.3" type="device">
+  <diagram id="Arch001" name="KnowledgeCity Architecture">
+    <mxGraphModel dx="1580" dy="860" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Frontend Layer -->
+        <mxCell id="frontend" value="Frontend (React/Svelte SPA)\nServed via CDN + Global DNS (Route53 / Cloudflare)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="600" y="60" width="300" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Load Balancer -->
+        <mxCell id="lb" value="Global Load Balancer (e.g., AWS ALB / GCP LB)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="620" y="180" width="260" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge1" source="frontend" target="lb" edge="1" style="endArrow=classic;" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Region Containers -->
+        <mxCell id="us-region" value="US Region (us-east-1)" style="swimlane;childLayout=stackLayout;rounded=1;horizontal=0;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="100" y="280" width="600" height="420" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="sa-region" value="Saudi Arabia Region (me-central-1)" style="swimlane;childLayout=stackLayout;rounded=1;horizontal=0;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="800" y="280" width="600" height="420" as="geometry"/>
+        </mxCell>
+
+        <!-- Inside US Region -->
+        <mxCell id="us-monolith" value="Monolithic PHP App (API Server)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="us-region">
+          <mxGeometry x="40" y="40" width="220" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="us-analytics" value="Analytics Service (ClickHouse)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="us-region">
+          <mxGeometry x="40" y="120" width="220" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="us-video" value="Video Encoding Service" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="us-region">
+          <mxGeometry x="40" y="200" width="220" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="us-db" value="Database (RDS / MySQL)\nUS User Data Only" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="us-region">
+          <mxGeometry x="300" y="100" width="240" height="80" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="us-storage" value="Video/Object Storage (S3 / GCS)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="us-region">
+          <mxGeometry x="300" y="220" width="240" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Inside Saudi Region -->
+        <mxCell id="sa-monolith" value="Monolithic PHP App (API Server)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="sa-region">
+          <mxGeometry x="40" y="40" width="220" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="sa-analytics" value="Analytics Service (ClickHouse)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="sa-region">
+          <mxGeometry x="40" y="120" width="220" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="sa-video" value="Video Encoding Service" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="sa-region">
+          <mxGeometry x="40" y="200" width="220" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="sa-db" value="Database (RDS / MySQL)\nSaudi User Data Only" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="sa-region">
+          <mxGeometry x="300" y="100" width="240" height="80" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="sa-storage" value="Video/Object Storage (S3 / GCS)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="sa-region">
+          <mxGeometry x="300" y="220" width="240" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Global CDN -->
+        <mxCell id="cdn" value="Global CDN (CloudFront / Cloudflare)\nDelivers static + video content globally" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d0e0e3;strokeColor=#0b5394;" vertex="1" parent="1">
+          <mxGeometry x="580" y="740" width="360" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Security and Observability -->
+        <mxCell id="security" value="Security & Observability:\n- WAF, DDoS, RBAC\n- Prometheus, Grafana\n- ELK / OpenTelemetry\n- Secrets Manager" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3f3f3;strokeColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="50" y="60" width="450" height="140" as="geometry"/>
+        </mxCell>
+
+        <!-- Connections -->
+        <mxCell id="edge2" source="lb" target="us-region" edge="1" style="endArrow=classic;" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge3" source="lb" target="sa-region" edge="1" style="endArrow=classic;" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edge4" source="us-storage" target="cdn" edge="1" style="endArrow=classic;" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge5" source="sa-storage" target="cdn" edge="1" style="endArrow=classic;" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
